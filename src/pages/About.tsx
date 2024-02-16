@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
  export default function About() {
     return (
         <Suspense fallback={<AboutSuspense/>}>
-            <div></div>
+            <div>Это About</div>
         </Suspense>
     )
  }
