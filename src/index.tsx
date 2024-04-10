@@ -5,7 +5,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // import i18n (needs to be bundled ;))
-import './i18n';
+import './i18n.ts';
 import Login from './pages/Login.tsx'
 import Register from './pages/Register.tsx'
 import Admin from './pages/Admin.tsx'
