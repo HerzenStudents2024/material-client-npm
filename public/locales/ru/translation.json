@@ -1,3 +1,13 @@
 {
+  "hello": "Привет!",
+  "select language": "Выберите предпочтительный язык",
+  "continue": "Продолжить",
+  "good morning": "Доброе утро",
+  "good afternoon": "Добрый день",
+  "good evening": "Добрый вечер",
+  "good night": "Доброй ночи",
+
+  "search on the map": "Поиск на карте",
+
   "learn": "теееееееест"
 }

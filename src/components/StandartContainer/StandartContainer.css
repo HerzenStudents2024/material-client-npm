@@ -1,0 +1,4 @@
+.standart-container {
+    padding-left: clamp(15px, 17%, 17%);
+    padding-right: clamp(15px, 17%, 17%);
+}

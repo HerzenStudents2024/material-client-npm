@@ -1,0 +1,56 @@
+:root {
+    --main-blue: #003896;
+    --main-l-blue: #8FB5E1;
+    --main-white: #FFFFFF;
+    --main-black: #000000;
+    --main-ll-blue: #E6EEF6;
+
+    /*Институт физической культуры и спорта*/
+    --additional-Institute-of-Physical-Culture-and-Sports: #DEB214;
+    /*Институт экономики и управления*/
+    --additional-Institute-of-economics-and-management: #F5A53A;
+    /*Институт народов севера*/
+    --additional-Institute-of-Northern-Peoples: #DC5C13;
+    /*Факультет химии*/
+    --additional-Faculty-of-Chemistry: #E43735;
+    /*Институт русского языка как иностранного*/
+    --additional-Institute-of-Russian-as-a-Foreign-Language: #C61D1A;
+    /*Институт истории и социальных наук*/
+    --additional-Institute-of-History-and-Social-Sciences: #A4183E;
+    /*Институт музыки, театра и хореорграфии*/
+    --additional-Institute-of-Music-Theater-and-Choreography: #D60D69;
+    /*Институт детства*/
+    --additional-Institute-of-Childhood: #DF4993;
+    /*Институт психологии*/
+    --additional-Institute-of-Psychology: #AF3580;
+    /*Институт художественного образования*/
+    --additional-Institute-of-Art-Education: #8C4682;
+    /*Институт физики*/
+    --additional-Institute-of-Physics: #8242A8;
+    /*Исследовательский институт педагогических проблем в образовании*/
+    --TOFOFOFOFOOFOFOFOOFOFOFOFOOF: #9E5BAF;
+    /*Институт информационных технологий и технологического образования*/
+    --additional-Institute-of-Information-Technology-and-Technological-Education: #6263AA;
+    /*Институт философии человека*/
+    --additional-Institute-of-Human-Philosophy: #7151AF;
+    /*Институт иностранных языков*/
+    --additional-University-of-the-Foreign-languages: #2087A5;
+    /*Юридический факультет*/
+    --additional-Faculty-of-Law: #2874B2;
+    /*Институт востоковедения*/
+    --additional-Institute-of-Oriental-Studies: #48C381;
+    /*Факультет математики*/
+    --additional-Faculty-of-Mathematics: #2CA137;
+    /*Факультет биологии*/
+    --additional-Faculty-of-Biology: #9DC21E;
+    /*Факультет географии*/
+    --additional-Faculty-of-Geography: #298B72;
+    /*Факультет безопасности жизнедеятельности*/
+    --additional-Faculty-of-Life-Safety: #127834;
+    /*Филологический факультет*/
+    --additional-Faculty-of-Philology: #95B8D2;
+    /*Институт педагогики*/
+    --additional-Institute-of-Pedagogy: #7BAABF;
+    /*Институт дифектологического образования и реабилитации*/
+    --additional-Institute-of-Special-Language-Education-and-Rehabilitation: #9999CC;
+}

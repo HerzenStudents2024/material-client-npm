@@ -1,0 +1,121 @@
+@import url(/public/colors.css);
+
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('../../../public/fonts/Roboto-Medium.ttf');
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../../../public/fonts/Roboto-Bold.ttf');
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../../../public/fonts/Roboto-Regular.ttf');
+    font-style: normal;
+    font-display: swap;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+/*==================UP HEADER====================*/
+.up-header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: 10px;
+    display: flex;
+}
+
+/*Logo block*/
+.up-header__left-block {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.logo-img {
+    margin-right: 15px;
+    width: 74px;
+    height: 86px;
+}
+
+.logo-text {
+    font-family: 'Roboto-Medium';
+    color: #003896;
+    font-size: 20px;
+    text-align: left;
+}
+
+/*Right block*/
+.up-header__right-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.up-header__right-block--item {
+    margin-left: 15px;
+}
+
+.search-img {
+    width: 20px;
+    height: 19px;
+}
+
+.font-size-img {
+    width: 25px;
+    height: 16px;
+}
+
+.language-text {
+    font-family: 'Roboto-Medium';
+    color: #003896;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.language-img {
+    width: 13px;
+    height: 18px;
+}
+
+.up-header__right-block__language-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/*==================DOWN HEADER====================*/
+
+.down-header {
+    background-color: var(--main-blue);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: clamp(5px, 17%, 17%);
+    padding-right: clamp(5px, 17%, 17%);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.down-header__bold-text {
+    color: white;
+    font-family: 'Roboto-Bold';
+    text-decoration: none;
+    flex-grow: 1;
+}
+
+.down-header__text {
+    color: white;
+    font-family: 'Roboto-Regular';
+    text-decoration: none;
+    margin-left: 30px;
+    flex-grow: 1;
+}

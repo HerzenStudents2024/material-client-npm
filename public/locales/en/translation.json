@@ -1,3 +1,13 @@
 {
+  "hello": "Hello",
+  "select language": "Select your preferred language",
+  "continue": "Continue",
+  "good morning": "Good morning",
+  "good afternoon": "Good afternoon",
+  "good evening": "Good evening",
+  "good night": "Good night",
+
+  "search on the map": "Search on the map",
+
   "learn": "tessssssst"
 }

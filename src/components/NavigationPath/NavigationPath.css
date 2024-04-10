@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../../../public/fonts/Roboto-Regular.ttf');
+    font-style: normal;
+    font-display: swap;
+}
+
+.navigation-path {
+    margin-top: 25px;
+    display: flex;
+    font-family: 'Roboto-Regular';
+    color: #808080;
+}
+
+.navigation-path__right-element::before {
+    content: ">";
+    margin-left: 5px;
+    margin-right: 5px;
+}

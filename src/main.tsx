@@ -10,17 +10,27 @@ import Login from './pages/Login.tsx'
 import Register from './pages/Register.tsx'
 import Admin from './pages/Admin.tsx'
 import Contact from './pages/Contact.tsx'
-import About from './pages/About.tsx'
 import Error404 from './pages/Error404.tsx'
 import Feedback from './pages/Feedback.tsx'
 import Settings from './pages/Settings.tsx'
 import Organization from './pages/Organization.tsx'
 import Organizations from './pages/Organizations.tsx'
 import Map from './pages/Map.tsx'
+import Landing from './pages/Landing.tsx'
+import MapMobile from './pages/MapMobile.tsx'
+import HelloMobile from './pages/HelloMobile.tsx'
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: 'mobile/hello',
+    element: <HelloMobile />
+  },
+  {
+    path: 'mobile/map',
+    element: <MapMobile />
+  },
+  {
+    path: '/app',
     element: <App />,
     errorElement: <Error404 />
   },
@@ -41,8 +51,8 @@ const router = createBrowserRouter([
     element: <Contact />
   },
   {
-    path: '/about',
-    element: <About />
+    path: '/',
+    element: <Landing />
   },
   {
     path: '/feedback',

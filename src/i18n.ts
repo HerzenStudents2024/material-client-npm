@@ -30,3 +30,9 @@ i18n
 
 
 export default i18n;
+
+export const languages = new Map<string, string>([
+  ["ru", "Русский"],
+  ["en", "English"],
+  ["zh", "中国人"]
+]);
