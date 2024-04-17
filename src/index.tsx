@@ -1,24 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './components/App/App.tsx'
+import App from './pages/App/App.tsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // import i18n (needs to be bundled ;))
 import './i18n.ts';
-import Login from './pages/Login.tsx'
-import Register from './pages/Register.tsx'
-import Admin from './pages/Admin.tsx'
-import Contact from './pages/Contact.tsx'
-import Error404 from './pages/Error404.tsx'
-import Feedback from './pages/Feedback.tsx'
-import Settings from './pages/Settings.tsx'
-import Organization from './pages/Organization.tsx'
-import Organizations from './pages/Organizations.tsx'
-import Map from './pages/Map.tsx'
-import Landing from './pages/Landing.tsx'
-import MapMobile from './pages/MapMobile.tsx'
-import HelloMobile from './pages/HelloMobile.tsx'
+import Login from './pages/Desktop/Login.tsx'
+import Register from './pages/Desktop/Register.tsx'
+import Admin from './pages/Desktop/Admin.tsx'
+import Contact from './pages/Desktop/Contact.tsx'
+import Error404 from './pages/Desktop/Error404.tsx'
+import Feedback from './pages/Desktop/Feedback.tsx'
+import Settings from './pages/Desktop/Settings.tsx'
+import Organization from './pages/Desktop/Organization.tsx'
+import Organizations from './pages/Desktop/Organizations.tsx'
+import Map from './pages/Desktop/Map.tsx'
+import Landing from './pages/Desktop/Landing.tsx'
+import MapMobile from './pages/Mobile/Map.tsx'
+import HelloMobile from './pages/Mobile/Hello.tsx'
+import MapTestMobile from './pages/Mobile/MapTest.tsx'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: 'mobile/map',
     element: <MapMobile />
+  },
+  {
+    path: 'mobile/maptest',
+    element: <MapTestMobile />
   },
   {
     path: '/app',

@@ -1,4 +1,4 @@
-import { Box, Button, Container, Grid, IconButton, Modal, TextField, ThemeProvider, Tooltip, Typography, createTheme, useTheme } from "@mui/material";
+import { Box, Button, Container, FormControl, Grid, IconButton, InputLabel, MenuItem, Modal, Select, SelectChangeEvent, TextField, ThemeProvider, Tooltip, Typography, createTheme, useTheme } from "@mui/material";
 import LayersIcon from '@mui/icons-material/Layers';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -6,21 +6,28 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import React, { Suspense } from "react";
 import { useTranslation } from "react-i18next";
+import { languages } from "../../i18n";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 function MapMobileComponent() {
-    /*Modal*/
+    //Modal
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const { t, i18n } = useTranslation();
 
-    /*Theme*/
+    //Theme
     const theme = useTheme();
     const colorMode = React.useContext(ColorModeContext);
 
+    //Language
+    const [age, setAge] = React.useState('');
+
+    const handleChange = (event: SelectChangeEvent) => {
+      setAge(event.target.value);
+    };
 
     return (
     <>
@@ -28,7 +35,7 @@ function MapMobileComponent() {
             <Grid item>
                 <Grid container direction="row" spacing={2} width="100%" alignItems="center" justifyContent="center">
                     <Grid item>
-                        <Tooltip title="Настроки сайта">
+                        <Tooltip title={t('site settings')}>
                             <Button variant="contained" sx={{height: "55px"}} onClick={handleOpen}>
                                 <SettingsIcon/>
                             </Button>
@@ -41,14 +48,14 @@ function MapMobileComponent() {
                 </Grid>
             </Grid>
             <Grid item textAlign="right">
-                <Tooltip title="Настройки слоёв" placement="left">
+                <Tooltip title={t('layer settings')} placement="left">
                     <Button variant="contained">
                         <LayersIcon/>
                     </Button>
                 </Tooltip>
             </Grid>
             <Grid item textAlign="right">
-                <Tooltip title="Показать меня" placement="left">
+                <Tooltip title={t('my location')} placement="left">
                     <Button variant="contained">
                         <MyLocationIcon/>
                     </Button>
@@ -57,14 +64,14 @@ function MapMobileComponent() {
             <Grid item spacing={2} direction="column" textAlign="right" mt={4}>
                 <Grid container direction="column" spacing={2}>
                     <Grid item textAlign="right">
-                        <Tooltip title="Приблизить" placement="left">
+                        <Tooltip title={t('zoom in')} placement="left">
                             <Button variant="contained">
                                 +
                             </Button>
                         </Tooltip>
                     </Grid>
                     <Grid item textAlign="right">
-                        <Tooltip title="Отдалить" placement="left">
+                        <Tooltip title={t('zoom out')} placement="left">
                             <Button variant="contained">
                                 -
                             </Button>
@@ -88,24 +95,41 @@ function MapMobileComponent() {
                 boxShadow: 24,
                 p: 4,
             }}>
-                <h1>Настроки сайта</h1>
+                <h1>{t('site settings')}</h1>
                 <Box sx={{
                     display: 'flex',
                     width: '100%',
                     alignItems: 'center',
-                    justifyContent: 'center',
                     bgcolor: 'background.default',
                     color: 'text.primary',
                     borderRadius: 1,
-                    p: 3,
+                    mt: 1
                 }}
                 >
-                <div></div>
-                {theme.palette.mode} mode
-                <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
-                    {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-                </IconButton>
+                    <p onClick={colorMode.toggleColorMode}>{theme.palette.mode === 'dark' ? t("dark mode") : t("light mode")}</p>
+                    <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+                        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                    </IconButton>
                 </Box>
+                <FormControl variant="standard" sx={{ minWidth: 120 }}>
+                        <InputLabel id="demo-simple-select-standard-label">{t("language")}</InputLabel>
+                        <Select
+                        labelId="demo-simple-select-standard-label"
+                        id="demo-simple-select-standard"
+                        value={age}
+                        onChange={handleChange}
+                        label="Age"
+                        >
+                            {Array.from(languages.keys())
+                                .map(language => 
+                                    <MenuItem 
+                                        onClick={() => i18n.changeLanguage(language)}
+                                        value={languages.get(language)}
+                                    >
+                                        {languages.get(language)}
+                            </MenuItem>)}
+                        </Select>
+                    </FormControl>
             </Box>
         </Modal>
     </>

@@ -1,4 +1,6 @@
 {
+  "herzen university": "HERZEN\nUNIVERSITY",
+
   "hello": "Hello",
   "select language": "Select your preferred language",
   "continue": "Continue",
@@ -7,7 +9,22 @@
   "good evening": "Good evening",
   "good night": "Good night",
 
+  "page is loading": "Page is loading...",
+
   "search on the map": "Search on the map",
+  "site settings": "Site settings",
+  "layer settings": "Layer settings",
+  "my location": "My location",
+  "zoom in": "Zoom in",
+  "zoom out": "Zoom out",
+  "dark mode": "Dark mode",
+  "light mode": "Light mode",
+  "language": "Language",
+
+  "cookies title": "This website uses cookies",
+  "cookies text": "Herzen map relies on cookies to improve your experience.",
+  "cookies allow all": "Allow all",
+  "cookies reject all": "Reject all",
 
   "learn": "tessssssst"
 }

@@ -1,4 +1,6 @@
 {
+  "herzen university": "РОССИЙСКИЙ ГОСУДАРСТВЕННЫЙ ПЕДАГОГИЧЕСКИЙ\nУНИВЕРСИТЕТ ИМ. А. И. ГЕРЦЕНА",
+
   "hello": "Привет!",
   "select language": "Выберите предпочтительный язык",
   "continue": "Продолжить",
@@ -7,7 +9,22 @@
   "good evening": "Добрый вечер",
   "good night": "Доброй ночи",
 
+  "page is loading": "Страница загружается...",
+
   "search on the map": "Поиск на карте",
+  "site settings": "Настройки сайта",
+  "layer settings": "Настройки слоёв",
+  "my location": "Моё местоположение",
+  "zoom in": "Приблизить",
+  "zoom out": "Отдалить",
+  "dark mode": "Тёмная тема",
+  "light mode": "Светлая тема",
+  "language": "Язык",
+
+  "cookies title": "Этот вебсайт использует cookies",
+  "cookies text": "Без них вы не сможете использовать все возможности сайта.",
+  "cookies allow all": "Разрешить все",
+  "cookies reject all": "Отклонить все",
 
   "learn": "теееееееест"
 }
