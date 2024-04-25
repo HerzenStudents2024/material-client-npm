@@ -4,9 +4,20 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { languages } from "../../i18n";
+
+import RGPYModel from "../3d/RGPYModel";
+//чтение
+import { useSelector } from "react-redux";
+//запись
+import { useDispatch } from "react-redux";
+import { setCameraPosition } from "../../store/slice";
+import * as THREE from 'three';
+import { MathUtils } from 'three';
+
+const shadowOffset = 50;
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -23,14 +34,46 @@ function MapMobileComponent() {
     const colorMode = React.useContext(ColorModeContext);
 
     //Language
-    const [age, setAge] = React.useState('');
+    const [lng, setLng] = React.useState('');
+
+    const camera = useRef(new THREE.PerspectiveCamera())
+
+    //чтение
+    const query = useSelector(
+        (state: { cameraPosition: { data: number[] } }) => state.cameraPosition.data,
+      ) as number[];
+    //запись
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        camera.current.rotation.set(-MathUtils.degToRad(60), 0, 0)
+        camera.current.position.set(query[0], query[1], query[2]);
+    })
+
+    const increaseZoom = () => {
+        const direction = new THREE.Vector3;
+        camera.current.getWorldDirection(direction);
+        camera.current.position.addScaledVector(direction, 2);
+        dispatch(setCameraPosition([camera.current.position.x, camera.current.position.y, camera.current.position.z]))
+    }
+
+    const decreaseZoom = () => {
+        const direction = new THREE.Vector3;
+        camera.current.getWorldDirection(direction);
+        camera.current.position.addScaledVector(direction, -2);
+        dispatch(setCameraPosition([camera.current.position.x, camera.current.position.y, camera.current.position.z]))
+    }
 
     const handleChange = (event: SelectChangeEvent) => {
-      setAge(event.target.value);
+      setLng(event.target.value);
     };
 
     return (
     <>
+        <div style={{position: 'absolute', width: '100%', height: '100%'}}>
+            <RGPYModel camera={camera.current}></RGPYModel>
+        </div>
+
         <Grid container direction="column" spacing={2} minHeight="100vh" minWidth="100vw" p={2}>
             <Grid item>
                 <Grid container direction="row" spacing={2} width="100%" alignItems="center" justifyContent="center">
@@ -42,7 +85,7 @@ function MapMobileComponent() {
                         </Tooltip>
                     </Grid>
                     <Grid item width="80%">
-                        <TextField placeholder={t("search on the map")} sx={{height: "55px"}} fullWidth={true}>
+                        <TextField variant='filled' placeholder={t("search on the map")} sx={{height: "55px"}} fullWidth={true} onChange={(event) => dispatch(setCameraPosition(event.target.value))}>
                         </TextField>
                     </Grid>
                 </Grid>
@@ -65,14 +108,14 @@ function MapMobileComponent() {
                 <Grid container direction="column" spacing={2}>
                     <Grid item textAlign="right">
                         <Tooltip title={t('zoom in')} placement="left">
-                            <Button variant="contained">
+                            <Button variant="contained" onClick={increaseZoom}>
                                 +
                             </Button>
                         </Tooltip>
                     </Grid>
                     <Grid item textAlign="right">
                         <Tooltip title={t('zoom out')} placement="left">
-                            <Button variant="contained">
+                            <Button variant="contained" onClick={decreaseZoom}>
                                 -
                             </Button>
                         </Tooltip>
@@ -80,6 +123,7 @@ function MapMobileComponent() {
                 </Grid>
             </Grid>
         </Grid>
+
 
 
         <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" >
@@ -116,9 +160,9 @@ function MapMobileComponent() {
                         <Select
                         labelId="demo-simple-select-standard-label"
                         id="demo-simple-select-standard"
-                        value={age}
+                        value={lng}
                         onChange={handleChange}
-                        label="Age"
+                        label="Language"
                         >
                             {Array.from(languages.keys())
                                 .map(language => 
