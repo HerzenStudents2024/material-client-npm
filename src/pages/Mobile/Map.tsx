@@ -22,13 +22,6 @@ const shadowOffset = 50;
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 function MapMobileComponent() {
-    //Modal
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
-    const { t, i18n } = useTranslation();
-
     //Theme
     const theme = useTheme();
     const colorMode = React.useContext(ColorModeContext);
@@ -68,6 +61,19 @@ function MapMobileComponent() {
       setLng(event.target.value);
     };
 
+    //Modal
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => {
+        dispatch(setCameraPosition([camera.current.position.x, camera.current.position.y, camera.current.position.z]))
+        setOpen(true);
+    }
+    const handleClose = () => {
+        dispatch(setCameraPosition([camera.current.position.x, camera.current.position.y, camera.current.position.z]))
+        setOpen(false);
+    }
+
+    const { t, i18n } = useTranslation();
+
     return (
     <>
         <div style={{position: 'absolute', width: '100%', height: '100%'}}>
@@ -85,7 +91,7 @@ function MapMobileComponent() {
                         </Tooltip>
                     </Grid>
                     <Grid item width="80%">
-                        <TextField variant='filled' placeholder={t("search on the map")} sx={{height: "55px"}} fullWidth={true} onChange={(event) => dispatch(setCameraPosition(event.target.value))}>
+                        <TextField variant='filled' placeholder={t("search on the map")} sx={{height: "55px"}} fullWidth={true} onChange={(event) => {}}>
                         </TextField>
                     </Grid>
                 </Grid>

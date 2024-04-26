@@ -1,7 +1,7 @@
 import { createTheme, useTheme } from "@mui/material";
 import React, { Suspense, useEffect, useRef } from "react";
 
-import { Canvas, useThree } from "@react-three/fiber";
+import { Camera, Canvas, useFrame, useThree } from "@react-three/fiber";
 import {Sky, Gltf, PerspectiveCamera, useFBX, useGLTF} from "@react-three/drei";
 import { MathUtils } from 'three';
 import { Stats, OrbitControls } from '@react-three/drei'
@@ -13,6 +13,7 @@ const shadowOffset = 50;
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
+
 export default function RGPYModel({camera} : any) {
     //Theme
     const theme = useTheme();
@@ -20,8 +21,6 @@ export default function RGPYModel({camera} : any) {
 
     //3d
     const fbx = useFBX('/3d/RGPY.fbx')
-
-    const dispatch = useDispatch();
 
     return (
     <Canvas camera={camera}>
@@ -44,11 +43,6 @@ export default function RGPYModel({camera} : any) {
         <meshStandardMaterial attach="material" color={"#6be092"} />
         <OrbitControls
             maxPolarAngle={Math.PI / 3}
-            // onUpdate={
-            //     () => dispatch(setCameraPosition(
-            //         [camera.current.position.x,
-            //         camera.current.position.y,
-            //         camera.current.position.z]))}
             />
         <Stats />
     </Canvas>
