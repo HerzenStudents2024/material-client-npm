@@ -1,4 +1,4 @@
-import { Box, Button, Container, FormControl, Grid, IconButton, InputLabel, MenuItem, Modal, Select, SelectChangeEvent, TextField, ThemeProvider, Tooltip, Typography, createTheme, useTheme } from "@mui/material";
+import { Box, Button, Container, FormControl, Grid, IconButton, InputLabel, MenuItem, Modal, Select, SelectChangeEvent, TextField, ThemeProvider, Tooltip, Typography, createTheme, makeStyles, useTheme } from "@mui/material";
 import LayersIcon from '@mui/icons-material/Layers';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -20,13 +20,12 @@ import SwipeableEdgeDrawer from "./components/SwipeableDrawer";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
+
+
 function MapMobileComponent() {
     //Theme
-    const theme = useTheme();
+    const theme = useTheme().palette.mode === 'dark';
     const colorMode = React.useContext(ColorModeContext);
-
-    //Language
-    const [lng, setLng] = React.useState('');
 
     const camera = useRef(new THREE.PerspectiveCamera())
 
@@ -56,11 +55,15 @@ function MapMobileComponent() {
         dispatch(setCameraPosition([camera.current.position.x, camera.current.position.y, camera.current.position.z]))
     }
 
+    const { t, i18n } = useTranslation();
+
+    //Modal
+    const [lng, setLng] = React.useState(languages.get(i18n.language));
+
     const handleChange = (event: SelectChangeEvent) => {
       setLng(event.target.value);
     };
 
-    //Modal
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
         dispatch(setCameraPosition([camera.current.position.x, camera.current.position.y, camera.current.position.z]))
@@ -71,26 +74,44 @@ function MapMobileComponent() {
         setOpen(false);
     }
 
-    const { t, i18n } = useTranslation();
-
     return (
     <>
         <div style={{position: 'absolute', width: '100%', height: '100%'}}>
             <RGPYModel camera={camera.current}></RGPYModel>
         </div>
 
-        <Grid container direction="column" spacing={2} minHeight="100vh" minWidth="100vw" p={2}>
+        <Grid 
+        container
+        direction="column" 
+        spacing={2} 
+        minHeight="100vh" 
+        minWidth="100vw" 
+        p={2}>
             <Grid item>
-                <Grid container direction="row" spacing={2} width="100%" alignItems="center" justifyContent="center">
+                <Grid 
+                container 
+                direction="row" 
+                spacing={2} 
+                width="100%" 
+                alignItems="center" 
+                justifyContent="center">
                     <Grid item>
                         <Tooltip title={t('site settings')}>
-                            <Button variant="contained" sx={{height: "55px"}} onClick={handleOpen}>
+                            <Button 
+                            variant="contained" 
+                            sx={{height: "55px"}} 
+                            onClick={handleOpen}>
                                 <SettingsIcon/>
                             </Button>
                         </Tooltip>
                     </Grid>
                     <Grid item width="80%">
-                        <TextField variant='filled' placeholder={t("search on the map")} sx={{height: "55px"}} fullWidth={true} onChange={(event) => {}}>
+                        <TextField 
+                        variant='filled' 
+                        placeholder={t("search on the map")} 
+                        sx={{height: "55px"}} 
+                        fullWidth={true} 
+                        onChange={(event) => {}}>
                         </TextField>
                     </Grid>
                 </Grid>
@@ -127,10 +148,14 @@ function MapMobileComponent() {
                     </Grid>
                 </Grid>
             </Grid>
-            <SwipeableEdgeDrawer/>
+            {/* <SwipeableEdgeDrawer/> */}
         </Grid>
 
-        <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" >
+        <Modal 
+        open={open} 
+        onClose={handleClose} 
+        aria-labelledby="modal-modal-title" 
+        aria-describedby="modal-modal-description" >
             <Box sx={{
                 position: 'absolute',
                 top: '50%',
@@ -154,28 +179,29 @@ function MapMobileComponent() {
                     mt: 1
                 }}
                 >
-                    <p onClick={colorMode.toggleColorMode}>{theme.palette.mode === 'dark' ? t("dark mode") : t("light mode")}</p>
+                    <p onClick={colorMode.toggleColorMode}>
+                        { theme ? t("dark mode") : t("light mode")}
+                    </p>
                     <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
-                        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                        {theme ? <Brightness7Icon /> : <Brightness4Icon />}
                     </IconButton>
                 </Box>
                 <FormControl variant="standard" sx={{ minWidth: 120 }}>
-                    <InputLabel id="demo-simple-select-standard-label">{t("language")}</InputLabel>
+                    <InputLabel>{t("language")}</InputLabel>
                     <Select
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
                     value={lng}
                     onChange={handleChange}
-                    label="Language"
                     >
-                        {Array.from(languages.keys())
-                            .map(language => 
-                                <MenuItem 
-                                    onClick={() => i18n.changeLanguage(language)}
-                                    value={languages.get(language)}
-                                >
-                                    {languages.get(language)}
-                        </MenuItem>)}
+                        {Array
+                        .from(languages.keys()) 
+                        .map(language => 
+                            <MenuItem 
+                            onClick={() => i18n.changeLanguage(language)}
+                            value={languages.get(language)}
+                            >
+                                {languages.get(language)}
+                            </MenuItem>)
+                        }
                     </Select>
                 </FormControl>
             </Box>

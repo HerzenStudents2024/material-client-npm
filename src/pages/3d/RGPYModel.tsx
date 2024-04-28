@@ -1,13 +1,9 @@
-import { createTheme, useTheme } from "@mui/material";
-import React, { Suspense, useEffect, useRef } from "react";
+import { useTheme } from "@mui/material";
+import React from "react";
 
-import { Camera, Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import {Sky, Gltf, PerspectiveCamera, useFBX, useGLTF} from "@react-three/drei";
-import { MathUtils } from 'three';
 import { Stats, OrbitControls } from '@react-three/drei'
-import * as THREE from 'three';
-import { useDispatch } from "react-redux";
-import { setCameraPosition } from "../../store/slice";
 
 const shadowOffset = 50;
 
@@ -24,7 +20,7 @@ export default function RGPYModel({camera} : any) {
     const model = useGLTF('/3d/RGPY.glb')
 
     return (
-    <Canvas camera={camera}>
+    <Canvas camera={camera} style={{position: 'absolute', width: '100%', height: '100%'}}>
         <Sky sunPosition={[100, 20, 100]}/>
         <ambientLight intensity={0.5}/>
         <directionalLight
