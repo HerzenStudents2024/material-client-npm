@@ -21,7 +21,7 @@ import Map from './pages/Desktop/Map.tsx'
 import Landing from './pages/Desktop/Landing.tsx'
 import MapMobile from './pages/Mobile/Map.tsx'
 import HelloMobile from './pages/Mobile/Hello.tsx'
-import MapTestMobile from './pages/Mobile/MapTest.tsx'
+import TestComponent from './pages/Mobile/Test.tsx'
 
 const router = createBrowserRouter([
   {
@@ -33,8 +33,8 @@ const router = createBrowserRouter([
     element: <MapMobile />
   },
   {
-    path: 'mobile/maptest',
-    element: <MapTestMobile />
+    path: 'mobile/test',
+    element: <TestComponent />
   },
   {
     path: '/app',

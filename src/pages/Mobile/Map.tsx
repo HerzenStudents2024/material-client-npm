@@ -16,8 +16,7 @@ import { useDispatch } from "react-redux";
 import { setCameraPosition } from "../../store/slice";
 import * as THREE from 'three';
 import { MathUtils } from 'three';
-
-const shadowOffset = 50;
+import SwipeableEdgeDrawer from "./components/SwipeableDrawer";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -128,13 +127,12 @@ function MapMobileComponent() {
                     </Grid>
                 </Grid>
             </Grid>
+            <SwipeableEdgeDrawer/>
         </Grid>
-
-
 
         <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" >
             <Box sx={{
-                position: 'absolute' as 'absolute',
+                position: 'absolute',
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
@@ -162,24 +160,24 @@ function MapMobileComponent() {
                     </IconButton>
                 </Box>
                 <FormControl variant="standard" sx={{ minWidth: 120 }}>
-                        <InputLabel id="demo-simple-select-standard-label">{t("language")}</InputLabel>
-                        <Select
-                        labelId="demo-simple-select-standard-label"
-                        id="demo-simple-select-standard"
-                        value={lng}
-                        onChange={handleChange}
-                        label="Language"
-                        >
-                            {Array.from(languages.keys())
-                                .map(language => 
-                                    <MenuItem 
-                                        onClick={() => i18n.changeLanguage(language)}
-                                        value={languages.get(language)}
-                                    >
-                                        {languages.get(language)}
-                            </MenuItem>)}
-                        </Select>
-                    </FormControl>
+                    <InputLabel id="demo-simple-select-standard-label">{t("language")}</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-standard-label"
+                    id="demo-simple-select-standard"
+                    value={lng}
+                    onChange={handleChange}
+                    label="Language"
+                    >
+                        {Array.from(languages.keys())
+                            .map(language => 
+                                <MenuItem 
+                                    onClick={() => i18n.changeLanguage(language)}
+                                    value={languages.get(language)}
+                                >
+                                    {languages.get(language)}
+                        </MenuItem>)}
+                    </Select>
+                </FormControl>
             </Box>
         </Modal>
     </>

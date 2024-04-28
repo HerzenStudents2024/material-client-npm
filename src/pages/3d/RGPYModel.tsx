@@ -20,7 +20,8 @@ export default function RGPYModel({camera} : any) {
     const colorMode = React.useContext(ColorModeContext);
 
     //3d
-    const fbx = useFBX('/3d/RGPY.fbx')
+    //const fbx = useFBX('/3d/RGPY.fbx')
+    const model = useGLTF('/3d/RGPY.glb')
 
     return (
     <Canvas camera={camera}>
@@ -36,9 +37,9 @@ export default function RGPYModel({camera} : any) {
             shadow-camera-right={-shadowOffset}
             position={[100, 100, 0]}
         />
-        <primitive object={fbx} scale={0.1}/>
+        {/* <primitive object={fbx} scale={0.1}/> */}
         {/* <Gltf castShadow receiveShadow scale={0.1} src="/3d/RGPY.glb"/> */}
-        {/* {<primitive object={model} scale={0.1}/>} not working*/} 
+        {<primitive object={model.scene} scale={0.1}/>} 
         {/* <Model /> */}
         <meshStandardMaterial attach="material" color={"#6be092"} />
         <OrbitControls
