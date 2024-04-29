@@ -11,6 +11,11 @@
 
   "page is loading": "Page is loading...",
 
+  "cookies title": "This website uses cookies",
+  "cookies text": "Herzen map relies on cookies to improve your experience.",
+  "cookies allow all": "Allow all",
+  "cookies reject all": "Reject all",
+
   "search on the map": "Search on the map",
   "site settings": "Site settings",
   "layer settings": "Layer settings",
@@ -20,11 +25,7 @@
   "dark mode": "Dark mode",
   "light mode": "Light mode",
   "language": "Language",
-
-  "cookies title": "This website uses cookies",
-  "cookies text": "Herzen map relies on cookies to improve your experience.",
-  "cookies allow all": "Allow all",
-  "cookies reject all": "Reject all",
+  "categories": "Categories",
 
   "learn": "tessssssst"
 }

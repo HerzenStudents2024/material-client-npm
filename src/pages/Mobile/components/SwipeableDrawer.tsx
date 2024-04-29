@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { Global } from '@emotion/react';
-import { Box, Button, CssBaseline, Skeleton, SwipeableDrawer, Typography } from '@mui/material';
+import { Box, Button, CssBaseline, Grid, IconButton, Skeleton, SwipeableDrawer, Theme, Typography, createStyles, makeStyles, styled } from '@mui/material';
 import grey from '@mui/material/colors/grey';
+import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
+import { useTranslation } from 'react-i18next';
 
 const drawerBleeding = 56;
 
@@ -13,13 +16,24 @@ interface Props {
   window?: () => Window;
 }
 
+const Puller = styled(Box)(({ theme }) => ({
+  width: 30,
+  height: 6,
+  backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[900],
+  borderRadius: 3,
+  position: 'absolute',
+  top: 8,
+  left: 'calc(50% - 15px)',
+}));
+
 export default function SwipeableEdgeDrawer(props: Props) {
   const { window } = props;
   const [open, setOpen] = React.useState(false);
 
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
+  const toggleDrawer = () => () => {
+    setOpen(!open);
   };
+  const { t } = useTranslation();
 
   // This is used only for the example
   const container = window !== undefined ? () => window().document.body : undefined;
@@ -29,24 +43,18 @@ export default function SwipeableEdgeDrawer(props: Props) {
       <CssBaseline />
       <Global
         styles={{
-          body: {
-            backgroundColor: `${grey[100]} !important`,
-          },
           '.MuiPaper-root.MuiPaper-root': {
             height: `calc(50% - ${drawerBleeding}px)`,
             overflow: 'visible',
           },
         }}
       />
-      <Box sx={{ textAlign: 'right', pt: 1 }}>
-        <Button onClick={toggleDrawer(true)}>Open</Button>
-      </Box>
       <SwipeableDrawer
         container={container}
         anchor="bottom"
         open={open}
-        onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
+        onClose={toggleDrawer()}
+        onOpen={toggleDrawer()}
         swipeAreaWidth={drawerBleeding}
         disableSwipeToOpen={false}
         ModalProps={{
@@ -55,30 +63,27 @@ export default function SwipeableEdgeDrawer(props: Props) {
       >
         <Box
           sx={{
-            position: 'absolute',
+            position: 'relative',
             top: -drawerBleeding,
             borderTopLeftRadius: 8,
             borderTopRightRadius: 8,
             visibility: 'visible',
-            right: 0,
-            left: 0,
             backgroundColor: '#fff',
           }}
         >
-          <Box
-            sx={{
-              width: 30,
-              height: 6,
-              bgcolor: 'grey.300',
-              borderRadius: '3px',
-              position: 'absolute',
-              top: 8,
-              left: 'calc(50% - 15px)',
-            }}
-          />
-          <Typography sx={{ p: 2, color: 'text.secondary' }}>51 results</Typography>
+          <Puller />
+          <Grid container justifyContent='space-between' direction='row'>
+            <Typography p={2} color='text.secondary' fontWeight='bold'>{t('categories')}</Typography>
+            {/* <Button sx={{
+              p: 2,
+              pointerEvents: "all"
+            }} onClick={toggleDrawer()}>{open ? "Close" : "Open"}</Button> */}
+              <IconButton sx={{pointerEvents: "auto"}} onClick={toggleDrawer()} color="inherit">
+                {open ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
+              </IconButton>
+          </Grid>
         </Box>
-        <Box sx={{ mx: 2, mb: 2, height: '100%', overflow: 'auto' }}>
+        <Box sx={{ mx: 2, height: '100%', overflow: 'auto' }}>
           <Skeleton variant="rectangular" height="100%" />
         </Box>
       </SwipeableDrawer>

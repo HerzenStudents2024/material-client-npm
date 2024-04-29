@@ -1,4 +1,4 @@
-import { useTheme } from "@mui/material";
+import { createTheme, useTheme } from "@mui/material";
 import React from "react";
 
 import { Canvas } from "@react-three/fiber";
@@ -19,13 +19,17 @@ export default function RGPYModel({camera} : any) {
     //const fbx = useFBX('/3d/RGPY.fbx')
     const model = useGLTF('/3d/RGPY.glb')
 
+    model.scene.traverse(child => {
+        if (child.material) child.material.metalness = 0;
+    })
+
     return (
     <Canvas camera={camera} style={{position: 'absolute', width: '100%', height: '100%'}}>
         <Sky sunPosition={[100, 20, 100]}/>
-        <ambientLight intensity={0.5}/>
+        <ambientLight intensity={1}/>
         <directionalLight
             castShadow
-            intensity={3}
+            intensity={5}
             shadow-mapSize={4096}
             shadow-camera-top={shadowOffset}
             shadow-camera-bottom={-shadowOffset}
@@ -35,9 +39,10 @@ export default function RGPYModel({camera} : any) {
         />
         {/* <primitive object={fbx} scale={0.1}/> */}
         {/* <Gltf castShadow receiveShadow scale={0.1} src="/3d/RGPY.glb"/> */}
-        {<primitive object={model.scene} scale={0.1}/>} 
+        {<primitive object={model.scene} scale={0.1}>
+            <meshStandardMaterial/>
+        </primitive>} 
         {/* <Model /> */}
-        <meshStandardMaterial attach="material" color={"#6be092"} />
         <OrbitControls
             maxPolarAngle={Math.PI / 3}
             />

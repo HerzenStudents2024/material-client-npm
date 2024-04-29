@@ -11,6 +11,11 @@
 
   "page is loading": "页面加载中......",
 
+  "cookies title": "本网站使用cookies",
+  "cookies text": "没有它们，您将无法使用该网站的所有功能.",
+  "cookies allow all": "允许全部",
+  "cookies reject all": "全部拒绝",
+
   "search on the map": "在地图上搜索",
   "site settings": "站点设置",
   "layer settings": "图层设置",
@@ -20,11 +25,7 @@
   "dark mode": "深色主题",
   "light mode": "浅色主题",
   "language": "语言",
-
-  "cookies title": "本网站使用cookies",
-  "cookies text": "没有它们，您将无法使用该网站的所有功能.",
-  "cookies allow all": "允许全部",
-  "cookies reject all": "全部拒绝",
+  "categories": "类别",
 
   "learn": "中文"
 }

@@ -11,6 +11,11 @@
 
   "page is loading": "Страница загружается...",
 
+  "cookies title": "Этот вебсайт использует cookies",
+  "cookies text": "Без них вы не сможете использовать все возможности сайта.",
+  "cookies allow all": "Разрешить все",
+  "cookies reject all": "Отклонить все",
+
   "search on the map": "Поиск на карте",
   "site settings": "Настройки сайта",
   "layer settings": "Настройки слоёв",
@@ -20,11 +25,7 @@
   "dark mode": "Тёмная тема",
   "light mode": "Светлая тема",
   "language": "Язык",
-
-  "cookies title": "Этот вебсайт использует cookies",
-  "cookies text": "Без них вы не сможете использовать все возможности сайта.",
-  "cookies allow all": "Разрешить все",
-  "cookies reject all": "Отклонить все",
+  "categories": "Категории",
 
   "learn": "теееееееест"
 }

@@ -148,7 +148,7 @@ function MapMobileComponent() {
                     </Grid>
                 </Grid>
             </Grid>
-            {/* <SwipeableEdgeDrawer/> */}
+            <SwipeableEdgeDrawer/>
         </Grid>
 
         <Modal 
