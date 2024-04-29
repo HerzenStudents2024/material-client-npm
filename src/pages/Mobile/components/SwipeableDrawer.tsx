@@ -8,14 +8,6 @@ import { useTranslation } from 'react-i18next';
 
 const drawerBleeding = 56;
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-}
-
 const Puller = styled(Box)(({ theme }) => ({
   width: 30,
   height: 6,
@@ -26,17 +18,13 @@ const Puller = styled(Box)(({ theme }) => ({
   left: 'calc(50% - 15px)',
 }));
 
-export default function SwipeableEdgeDrawer(props: Props) {
-  const { window } = props;
+export default function SwipeableEdgeDrawer() {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = () => () => {
     setOpen(!open);
   };
   const { t } = useTranslation();
-
-  // This is used only for the example
-  const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
     <div>
@@ -50,7 +38,6 @@ export default function SwipeableEdgeDrawer(props: Props) {
         }}
       />
       <SwipeableDrawer
-        container={container}
         anchor="bottom"
         open={open}
         onClose={toggleDrawer()}
