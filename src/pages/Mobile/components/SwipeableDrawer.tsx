@@ -18,6 +18,21 @@ const Puller = styled(Box)(({ theme }) => ({
   left: 'calc(50% - 15px)',
 }));
 
+const ModalBottomPart = styled(Box)(({ theme }) => ({
+  bgcolor:'inherit',
+  height: '100%',
+  overflow: 'auto'
+}));
+
+const Modal = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  top: -drawerBleeding,
+  borderTopLeftRadius: 8,
+  borderTopRightRadius: 8,
+  visibility: 'visible',
+  backgroundColor: 'inherit',
+}));
+
 export default function SwipeableEdgeDrawer() {
   const [open, setOpen] = React.useState(false);
 
@@ -47,20 +62,12 @@ export default function SwipeableEdgeDrawer() {
         ModalProps={{
           keepMounted: true,
         }}
+        allowSwipeInChildren={true}
       >
-        <Box
-          sx={{
-            position: 'relative',
-            top: -drawerBleeding,
-            borderTopLeftRadius: 8,
-            borderTopRightRadius: 8,
-            visibility: 'visible',
-            backgroundColor: '#fff',
-          }}
-        >
+        <Modal>
           <Puller />
           <Grid container justifyContent='space-between' direction='row'>
-            <Typography p={2} color='text.secondary' fontWeight='bold'>{t('categories')}</Typography>
+            <Typography p={2} fontWeight='bold'>{t('categories')}</Typography>
             {/* <Button sx={{
               p: 2,
               pointerEvents: "all"
@@ -69,10 +76,10 @@ export default function SwipeableEdgeDrawer() {
                 {open ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
               </IconButton>
           </Grid>
-        </Box>
-        <Box sx={{ mx: 2, height: '100%', overflow: 'auto' }}>
-          <Skeleton variant="rectangular" height="100%" />
-        </Box>
+          <ModalBottomPart>
+            <Skeleton variant="rectangular" height="100%" />
+          </ModalBottomPart>
+        </Modal>
       </SwipeableDrawer>
     </div>
   );

@@ -1,13 +1,45 @@
 import { createTheme, useTheme } from "@mui/material";
-import React from "react";
+import React, { useRef, useState } from "react";
 
-import { Canvas } from "@react-three/fiber";
-import {Sky, Gltf, PerspectiveCamera, useFBX, useGLTF} from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {Sky, Gltf, PerspectiveCamera, useFBX, useGLTF, useTexture, MeshDistortMaterial} from "@react-three/drei";
 import { Stats, OrbitControls } from '@react-three/drei'
+import { easing } from 'maath'
+
+import PersonPinCircleIcon from '@mui/icons-material/PersonPinCircle';
+
 
 const shadowOffset = 50;
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+
+
+function Image({ url, ...props }) {
+    const ref = useRef()
+    const [hovered, hover] = useState(false)
+    const [clicked, click] = useState(false)
+    const texture = useTexture(url)
+  
+    useFrame((state, delta) => {
+      easing.damp(ref.current.material, 'distort', hovered ? 0.5 : 0, 0.25, delta)
+      easing.damp(ref.current.material, 'speed', hovered ? 4 : 0, 0.25, delta)
+      easing.dampE(ref.current.rotation, clicked ? [0, 0, Math.PI] : [0, 0, 0], 0.5, delta)
+      easing.damp3(ref.current.scale, clicked ? 15 : 10, 0.25, delta)
+      easing.dampC(ref.current.material.color, hovered ? '#003896' : 'white', 0.25, delta)
+    })
+  
+    return (
+      <mesh
+        ref={ref}
+        onClick={(e) => (e.stopPropagation(), click(!clicked))}
+        onPointerOver={(e) => (e.stopPropagation(), hover(true))}
+        onPointerOut={(e) => (e.stopPropagation(), hover(false))}
+        {...props}>
+        <planeGeometry args={[1, 1, 64, 64]} />
+        <MeshDistortMaterial map={texture} speed={4} toneMapped={false} />
+      </mesh>
+    )
+  }
 
 
 export default function RGPYModel({camera} : any) {
@@ -47,6 +79,7 @@ export default function RGPYModel({camera} : any) {
             maxPolarAngle={Math.PI / 3}
             />
         <Stats />
+        <Image url="../../../public/images/main/light-background-logo.png" position={[10, 10, 10]} />
     </Canvas>
     )
 }
