@@ -128,7 +128,7 @@ function MapMobileComponent() {
     return (
     <>
         <Map>
-            <RGPYModel camera={camera.current}></RGPYModel>
+            <RGPYModel camera={camera.current} theme={theme}></RGPYModel>
         </Map>
 
         <Grid 
@@ -136,7 +136,7 @@ function MapMobileComponent() {
         direction="column" 
         spacing={2} 
         minHeight="100vh" 
-        minWidth="100vw" 
+        minWidth="100vw"
         p={2}>
             <Grid item>
                 <Grid 
@@ -150,7 +150,7 @@ function MapMobileComponent() {
                         <Tooltip title={t('site settings')}>
                             <Button 
                             variant="contained" 
-                            sx={{height: "55px"}} 
+                            sx={{height: "55px", zIndex: 100000000}} 
                             onClick={handleOpen}>
                                 <SettingsIcon/>
                             </Button>
@@ -160,7 +160,7 @@ function MapMobileComponent() {
                         <TextField 
                         variant='filled' 
                         placeholder={t("search on the map")} 
-                        sx={{height: "55px"}} 
+                        sx={{height: "55px", zIndex: 100000000}} 
                         fullWidth={true} 
                         onChange={(event) => {}}>
                         </TextField>
@@ -169,14 +169,14 @@ function MapMobileComponent() {
             </Grid>
             <Grid item textAlign="right">
                 <Tooltip title={t('layer settings')} placement="left">
-                    <Button variant="contained">
+                    <Button variant="contained" sx={{zIndex: 100000000}}>
                         <LayersIcon/>
                     </Button>
                 </Tooltip>
             </Grid>
             <Grid item textAlign="right">
-                <Tooltip title={t('my location')} placement="left">
-                    <Button variant="contained" onClick={handleLocationClick}>
+                <Tooltip title={t('my location')} placement="left" sx={{zIndex: 100000000}}>
+                    <Button variant="contained" onClick={handleLocationClick} sx={{zIndex: 100000000}}>
                         <MyLocationIcon/>
                     </Button>
                 </Tooltip>
@@ -184,15 +184,15 @@ function MapMobileComponent() {
             <Grid item spacing={2} direction="column" textAlign="right" mt={4}>
                 <Grid container direction="column" spacing={2}>
                     <Grid item textAlign="right">
-                        <Tooltip title={t('zoom in')} placement="left">
-                            <Button variant="contained" onClick={increaseZoom}>
+                        <Tooltip title={t('zoom in')} placement="left" sx={{zIndex: 100000000}}>
+                            <Button variant="contained" onClick={increaseZoom} sx={{zIndex: 100000000}}>
                                 +
                             </Button>
                         </Tooltip>
                     </Grid>
                     <Grid item textAlign="right">
-                        <Tooltip title={t('zoom out')} placement="left">
-                            <Button variant="contained" onClick={decreaseZoom}>
+                        <Tooltip title={t('zoom out')} placement="left" sx={{zIndex: 100000000}}>
+                            <Button variant="contained" onClick={decreaseZoom} sx={{zIndex: 100000000}}>
                                 -
                             </Button>
                         </Tooltip>
@@ -206,7 +206,8 @@ function MapMobileComponent() {
         open={open} 
         onClose={handleClose} 
         aria-labelledby="modal-modal-title" 
-        aria-describedby="modal-modal-description" >
+        aria-describedby="modal-modal-description"
+        sx={{zIndex: 100000000}}>
             <Box sx={modalStyle}>
                 <h1>{t('site settings')}</h1>
                 <FieldContainer>
@@ -218,13 +219,8 @@ function MapMobileComponent() {
                     </IconButton>
                 </FieldContainer>
                 <FieldContainer marginBottom={1}>
-                    <InputLabel sx={{marginRight: 1}}>{t("language")}:</InputLabel>
-                    <Select
-                    variant="standard"
-                    value={lng}
-                    onChange={handleChange}
-                    >
-                        {Array
+                    <InputLabel sx={{color:"inherit", marginRight: 1, zIndex: 100000001}}>{t("language")}:</InputLabel>
+                    {Array
                         .from(languages.keys()) 
                         .map(language => 
                             <MenuItem 
@@ -234,12 +230,11 @@ function MapMobileComponent() {
                                 {languages.get(language)}
                             </MenuItem>)
                         }
-                    </Select>
                 </FieldContainer>
                 
                 <FieldContainer>
-                    <Button variant="outlined" sx={{marginRight: 1}} onClick={() => window.open("/mobile/signup", "_self")}>Вход</Button>
-                    <Button variant="outlined" onClick={() => window.open("/mobile/signu", "_self")} >Регистрация</Button>
+                    <Button variant="outlined" sx={{marginRight: 1}} onClick={() => window.open("/mobile/signin", "_self")}>Вход</Button>
+                    <Button variant="outlined" onClick={() => window.open("/mobile/signup", "_self")} >Регистрация</Button>
                 </FieldContainer>
                 
             </Box>

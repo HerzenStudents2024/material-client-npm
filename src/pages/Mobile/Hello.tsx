@@ -25,7 +25,8 @@ export default function HelloMobile() {
             justifyContent="center" 
             minHeight="100vh"
         >
-            <Grid item margin={0}>
+            <Grid item margin={0} alignItems="center" 
+            justifyContent="center" >
                 <h1>{GetTimesOfDay()}</h1>
                 <span>{t('select language')}</span>
             </Grid>

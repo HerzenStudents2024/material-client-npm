@@ -1,9 +1,6 @@
 import { Suspense, useState } from 'react'
 import './Header.css'
 import logo from '/images/main/light-background-simple-logo.png'
-import eye from '/images/main/Eye.png'
-import magnifier from '/images/main/Magnifier.png'
-import blueTriangle from '/images/main/BlueTriangle.png'
 import { useTranslation } from 'react-i18next';
 import StandartContainer from '../StandartContainer/StandartContainer'
 
@@ -23,12 +20,12 @@ export default function Header() {
                 <p className='logo-text'>РОССИЙСКИЙ ГОСУДАРСТВЕННЫЙ ПЕДАГОГИЧЕСКИЙ<br></br>УНИВЕРСИТЕТ ИМ. А. И. ГЕРЦЕНА</p>
             </div>
             <div className='up-header__right-block'>
-                <img src={magnifier} className='search-img up-header__right-block--item' alt='Search' />
+                {/* <img src={magnifier} className='search-img up-header__right-block--item' alt='Search' />
                 <img src={eye} className='font-size-img up-header__right-block--item' alt='Change font size' />
                 <div className='up-header__right-block__language-block up-header__right-block--item'>
                     <p className='language-text'>{i18n.language}</p>
                     <img className='language-img' src={blueTriangle} alt="Change language" />
-                </div>
+                </div> */}
             </div>
         </div>
     </StandartContainer>

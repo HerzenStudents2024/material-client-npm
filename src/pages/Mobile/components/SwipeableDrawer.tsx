@@ -63,6 +63,7 @@ export default function SwipeableEdgeDrawer() {
           keepMounted: true,
         }}
         allowSwipeInChildren={true}
+        sx={{zIndex: 100000000}}
       >
         <Modal>
           <Puller />
