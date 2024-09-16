@@ -78,7 +78,6 @@ export default function SwipeableEdgeDrawer() {
               </IconButton>
           </Grid>
           <ModalBottomPart>
-            <Skeleton variant="rectangular" height="100%" />
           </ModalBottomPart>
         </Modal>
       </SwipeableDrawer>

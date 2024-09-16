@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { ThemeProvider, createTheme } from "@mui/material";
 
 //import {App as AppPage} from './pages/App/App.tsx'
 import Map from './pages/Desktop/Map.tsx'
@@ -10,6 +11,7 @@ import Test2Component from './pages/Mobile/Test2.tsx'
 import SignIn from './pages/Mobile/SignIn.tsx'
 import SignUp from './pages/Mobile/SignUp.tsx'
 import Error404 from './pages/Mobile/Error404.tsx'
+import React from 'react'
 
 
 const router = createBrowserRouter([
@@ -57,11 +59,38 @@ const router = createBrowserRouter([
       path: '/map/:mapId/zoom/:zoom/centerX/:centerX/centerY/:centerY/centerZ/:centerZ/fromLocation/:fromLocationId/toLocation/:toLocationId',
       element: <Map />
     },
-  ])
+  ]
+)
+
+const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 function App() {
+  const [mode, setMode] = React.useState<'light' | 'dark'>('light');
+  const colorMode = React.useMemo(
+      () => ({
+      toggleColorMode: () => {
+          setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+      }),
+      [],
+  );
+
+  const theme = React.useMemo(
+      () =>
+      createTheme({
+          palette: {
+          mode,
+          },
+      }),
+      [mode],
+  );
+
   return (
-    <RouterProvider router={router} />
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 

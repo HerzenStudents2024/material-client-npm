@@ -46,7 +46,7 @@ export default function HelloMobile() {
             <Grid item>
                 <Button 
                     variant="contained"
-                    onClick={() => open("/mobile/map", "_self")} 
+                    href="/mobile/map"
                     sx={{mt: 2}}
                 >
                     {t('continue')}

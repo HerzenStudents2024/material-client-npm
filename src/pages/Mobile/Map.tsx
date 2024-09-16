@@ -1,4 +1,4 @@
-import { Box, Button, Container, FormControl, Grid, IconButton, InputLabel, MenuItem, Modal, Select, SelectChangeEvent, TextField, ThemeProvider, Tooltip, Typography, createTheme, makeStyles, styled, useTheme } from "@mui/material";
+import { Box, Button, Container, FormControl, Grid, IconButton, InputLabel, MenuItem, Modal, Select, SelectChangeEvent, TextField, ThemeProvider, Tooltip, Typography, createTheme, makeStyles, styled, useTheme, ButtonGroup } from "@mui/material";
 import LayersIcon from '@mui/icons-material/Layers';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -8,12 +8,13 @@ import React, { Suspense, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { languages } from "../../i18n";
 
-import RGPYModel from "../3d/RGPYModel";
+import RGPYModel from "./components/RGPYModel";
 //чтение
 import { useSelector } from "react-redux";
 //запись
 import { useDispatch } from "react-redux";
-import { setCameraPosition } from "../../store/slice";
+import { setCameraPosition } from "../../store/CameraPositionSlice";
+import { setFloorButton } from "../../store/FloorButtonSlice";
 import * as THREE from 'three';
 import { MathUtils } from 'three';
 import SwipeableEdgeDrawer from "./components/SwipeableDrawer";
@@ -46,6 +47,15 @@ const FieldContainer = styled(Box)(({ theme }) => ({
 
 
 function MapMobileComponent() {
+    const [mapViewIs3d, setMapViewIs3d] = useState(true);
+
+    function changeMapView() {
+        saveCameraPosition();
+
+        setMapViewIs3d(!mapViewIs3d)
+    }
+    
+
     //===Location===
     const [location, setLocation] = useState(null);
 
@@ -68,7 +78,6 @@ function MapMobileComponent() {
     function error() {
         console.log("Unable to retrieve your location");
     }
-    
 
     //===Theme===
     const theme = useTheme().palette.mode === 'dark';
@@ -80,15 +89,23 @@ function MapMobileComponent() {
     const camera = useRef(new THREE.PerspectiveCamera())
 
     //чтение
-    const query = useSelector(
+    const cameraPosition = useSelector(
         (state: { cameraPosition: { data: number[] } }) => state.cameraPosition.data,
       ) as number[];
+    //чтение
+    const floorButtons = useSelector(
+        (state: { floorButton: { data: boolean[] } }) => state.floorButton.data,
+      ) as boolean[];
+    //чтение
+    const floorButtonsVisibility = useSelector(
+        (state: { floorButton: { visibility: boolean[] } }) => state.floorButton.visibility,
+      ) as boolean[];
     //запись
     const dispatch = useDispatch();
 
     useEffect(() => {
         camera.current.rotation.set(-MathUtils.degToRad(60), 0, 0)
-        camera.current.position.set(query[0], query[1], query[2]);
+        camera.current.position.set(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
     })
 
     const direction = new THREE.Vector3;
@@ -96,6 +113,11 @@ function MapMobileComponent() {
 
     const saveCameraPosition = () => {
         dispatch(setCameraPosition([camera.current.position.x, camera.current.position.y, camera.current.position.z]))
+    }
+
+    const setFloor = (x: number) => {
+        saveCameraPosition()
+        dispatch(setFloorButton([true, 1 < x, 2 < x, 3 < x, 4 < x]))
     }
 
     const increaseZoom = () => {
@@ -125,6 +147,10 @@ function MapMobileComponent() {
         setOpen(false);
     }
 
+    function modalContent() {
+        return <div></div>
+    }
+
     return (
     <>
         <Map>
@@ -147,7 +173,7 @@ function MapMobileComponent() {
                 alignItems="center" 
                 justifyContent="center">
                     <Grid item>
-                        <Tooltip title={t('site settings')}>
+                        <Tooltip title={t('site settings')} PopperProps={{style:{zIndex:100000000}}}>
                             <Button 
                             variant="contained" 
                             sx={{height: "55px", zIndex: 100000000}} 
@@ -168,37 +194,60 @@ function MapMobileComponent() {
                 </Grid>
             </Grid>
             <Grid item textAlign="right">
-                <Tooltip title={t('layer settings')} placement="left">
+                <Tooltip title={t('map view')} placement="left" PopperProps={{style:{zIndex:100000000}}}>
+                    <Button variant="contained" onClick={changeMapView} sx={{zIndex: 100000000}}>
+                        {mapViewIs3d ? "3D" : "2D"}
+                    </Button>
+                </Tooltip>
+            </Grid>
+            <Grid item textAlign="right">
+                <Tooltip title={t('layer settings')} placement="left" PopperProps={{style:{zIndex:100000000}}}>
                     <Button variant="contained" sx={{zIndex: 100000000}}>
                         <LayersIcon/>
                     </Button>
                 </Tooltip>
             </Grid>
             <Grid item textAlign="right">
-                <Tooltip title={t('my location')} placement="left" sx={{zIndex: 100000000}}>
+                <Tooltip title={t('my location')} placement="left" PopperProps={{style:{zIndex:100000000}}}>
                     <Button variant="contained" onClick={handleLocationClick} sx={{zIndex: 100000000}}>
                         <MyLocationIcon/>
                     </Button>
                 </Tooltip>
             </Grid>
-            <Grid item spacing={2} direction="column" textAlign="right" mt={4}>
-                <Grid container direction="column" spacing={2}>
-                    <Grid item textAlign="right">
-                        <Tooltip title={t('zoom in')} placement="left" sx={{zIndex: 100000000}}>
-                            <Button variant="contained" onClick={increaseZoom} sx={{zIndex: 100000000}}>
-                                +
-                            </Button>
-                        </Tooltip>
-                    </Grid>
-                    <Grid item textAlign="right">
-                        <Tooltip title={t('zoom out')} placement="left" sx={{zIndex: 100000000}}>
-                            <Button variant="contained" onClick={decreaseZoom} sx={{zIndex: 100000000}}>
-                                -
-                            </Button>
-                        </Tooltip>
-                    </Grid>
-                </Grid>
+            <Grid item textAlign="right" mt={4}>
+                <Tooltip title={t('zoom in')} placement="left" PopperProps={{style:{zIndex:100000000}}}>
+                    <Button variant="contained" onClick={increaseZoom} sx={{zIndex: 100000000}}>
+                        +
+                    </Button>
+                </Tooltip>
             </Grid>
+            <Grid item textAlign="right">
+                <Tooltip title={t('zoom out')} placement="left" PopperProps={{style:{zIndex:100000000}}}>
+                    <Button variant="contained" onClick={decreaseZoom} sx={{zIndex: 100000000}}>
+                        -
+                    </Button>
+                </Tooltip>
+            </Grid>
+            <Grid item textAlign="right" mt={4}>
+                <ButtonGroup orientation="vertical">
+                    {floorButtonsVisibility[4] && <Button variant="contained" onClick={() => setFloor(5)} sx={{zIndex: 100000000}} color={floorButtons[4] ? "primary" : "inherit"}>
+                        5
+                    </Button>}
+                    {floorButtonsVisibility[3] && <Button variant="contained" onClick={() => setFloor(4)} sx={{zIndex: 100000000}} color={floorButtons[3] ? "primary" : "inherit"}>
+                        4
+                    </Button>}
+                    {floorButtonsVisibility[2] && <Button variant="contained" onClick={() => setFloor(3)} sx={{zIndex: 100000000}} color={floorButtons[2] ? "primary" : "inherit"}>
+                        3
+                    </Button>}
+                    {floorButtonsVisibility[1] && <Button variant="contained" onClick={() => setFloor(2)} sx={{zIndex: 100000000}} color={floorButtons[1] ? "primary" : "inherit"}>
+                        2
+                    </Button>}
+                    {floorButtonsVisibility[0] && <Button variant="contained" onClick={() => setFloor(1)} sx={{zIndex: 100000000}} color={floorButtons[0] ? "primary" : "inherit"}>
+                        1
+                    </Button>}
+                </ButtonGroup>
+                </Grid>
+
             <SwipeableEdgeDrawer/>
         </Grid>
 
@@ -233,8 +282,8 @@ function MapMobileComponent() {
                 </FieldContainer>
                 
                 <FieldContainer>
-                    <Button variant="outlined" sx={{marginRight: 1}} onClick={() => window.open("/mobile/signin", "_self")}>Вход</Button>
-                    <Button variant="outlined" onClick={() => window.open("/mobile/signup", "_self")} >Регистрация</Button>
+                    <Button variant="outlined" sx={{marginRight: 1}} href="/mobile/signin">Вход</Button>
+                    <Button variant="outlined" href="/mobile/signup">Регистрация</Button>
                 </FieldContainer>
                 
             </Box>
