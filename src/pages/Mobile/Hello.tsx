@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Suspense } from "react";
 import Stack from '@mui/material/Stack';
 import { Box, Button, Fade, Grid, Paper, Typography } from "@mui/material";

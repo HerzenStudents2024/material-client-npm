@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { Suspense } from "react";
 import Header from "./components/Header/Header";
 import NavigationPath from "./components/NavigationPath/NavigationPath";

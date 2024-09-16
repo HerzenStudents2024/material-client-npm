@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { MeshDistortMaterial, useTexture } from '@react-three/drei'

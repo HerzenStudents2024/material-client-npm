@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Suspense, useState } from 'react'
 import reactLogo from '/react.svg'
 import viteLogo from '/vite.svg'

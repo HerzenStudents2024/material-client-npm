@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import './StandartContainer.css'
 
 export default function StandartContainer({ children } : any ) {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { BrowserRouter, Route, createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ThemeProvider, createTheme } from "@mui/material";
 

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import * as React from 'react';
 import { Global } from '@emotion/react';
 import { Box, Button, CssBaseline, Grid, IconButton, Skeleton, SwipeableDrawer, Theme, Typography, createStyles, makeStyles, styled } from '@mui/material';

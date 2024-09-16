@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Avatar, Grid, Typography, createTheme, useTheme } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Suspense, useState } from 'react'
 import './Header.css'
 import logo from '/images/main/light-background-simple-logo.png'

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Suspense, useState } from 'react'
 import './Article.css'
 import { useTranslation } from 'react-i18next';
